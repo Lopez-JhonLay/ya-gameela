@@ -27,6 +27,18 @@ Then open [http://localhost:3000](http://localhost:3000).
 
 Reuse an existing development server instead of starting another instance.
 
+Copy the non-secret defaults from `.env.example` into a local environment file only when an override is needed. Application code reads environment variables through the validated `lib/env` boundary.
+
+## Project Structure
+
+- `app/(storefront)/` composes public routes without changing their URLs.
+- `modules/` owns business contracts and implementation by capability.
+- `components/ui/` owns accessible component primitives.
+- `components/storefront/` owns shared public presentation.
+- `lib/` owns shared environment, logging, Supabase, and security infrastructure.
+
+Consumers import another module through its public `index.ts`. Server-only DAL, secret, and provider modules must begin with `import "server-only"` and return minimal serializable DTOs.
+
 ## Checks
 
 ```bash

@@ -29,7 +29,7 @@ This roadmap turns the approved [product requirements](PRD.md), [architecture](A
   - **Verify:** Run formatting checks, ESLint, TypeScript, the starter unit/component tests, Playwright discovery, and a production build.
   - **Complete when:** Every required tool has an approved, locked dependency and repeatable npm script, with no unused package added speculatively.
 
-- [ ] **3. Create the modular application foundation**
+- [x] **3. Create the modular application foundation**
   - **Depends on:** Task 2.
   - **Setup:** Read the installed Next.js guidance for Server Components, Server Actions, data security, route groups, and environment variables.
   - **Deliver:** Establish the documented `app`, `modules`, `components`, and `lib` boundaries; add server-only import guards, common DTO and `ActionResult` conventions, validated environment access, correlation IDs, and allowlisted structured logging with PII redaction.
