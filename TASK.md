@@ -22,7 +22,7 @@ This roadmap turns the approved [product requirements](PRD.md), [architecture](A
   - **Verify:** Check runtime/version declarations, run existing lint, type, and production-build commands, and confirm no generated or unrelated files entered the diff.
   - **Complete when:** A clean checkout uses the documented Node/npm versions and the unchanged starter passes the available baseline checks.
 
-- [ ] **2. Install the approved application and testing foundations**
+- [x] **2. Install the approved application and testing foundations**
   - **Depends on:** Task 1.
   - **Setup:** Present one exact dependency/version proposal and obtain approval before each `npm install`; cover Supabase SSR/client libraries, Zod, `server-only`, decimal money arithmetic, Resend, Vercel integrations, owned shadcn/Radix utilities, Vitest, Testing Library, Playwright, and formatting tools.
   - **Deliver:** Install only approved packages, keep lockfile changes paired with them, configure unit/component/browser test entry points, and add a minimal passing test at each configured layer that does not require Supabase.

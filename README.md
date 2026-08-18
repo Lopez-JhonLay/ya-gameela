@@ -32,14 +32,18 @@ Reuse an existing development server instead of starting another instance.
 ```bash
 npm run lint
 npm run typecheck
+npm run format:check
 npm test
+npm run test:coverage
+npm run test:e2e:list
+npm run test:e2e
 npm run check
 npm run build
 ```
 
-`npm run check` runs the currently configured lint, type, and test checks. The test command uses Node's built-in test runner until the full test stack is added in Task 2.
+`npm run check` runs formatting, lint, type, and unit/component tests. `npm run test:e2e:list` validates Playwright discovery without starting a browser. Running the browser suite requires the relevant Playwright browser binaries.
 
-Editor-neutral whitespace and indentation conventions are defined in `.editorconfig`. Automated formatting tooling is also added in Task 2.
+Editor-neutral whitespace and indentation conventions are defined in `.editorconfig`; Prettier provides the automated formatting checks.
 
 ## Project Workflow
 
