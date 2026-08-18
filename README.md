@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ya Gameela
 
-## Getting Started
+Ya Gameela V1 is a marketing catalog and custom CMS for perfumes, bags, beauty products, and clothing. Product behavior and technical decisions are documented in [PRD.md](PRD.md) and [ARCHITECTURE.md](ARCHITECTURE.md).
 
-First, run the development server:
+## Prerequisites
+
+- Node.js `24.13.1` (Node.js 24 LTS)
+- npm `11.8.0`
+
+The repository declares its package manager in `package.json` and includes an `.nvmrc` for compatible Node version managers.
+
+## Local Development
+
+Install the locked dependencies:
+
+```bash
+npm ci
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Reuse an existing development server instead of starting another instance.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Checks
 
-## Learn More
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run check
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+`npm run check` runs the currently configured lint, type, and test checks. The test command uses Node's built-in test runner until the full test stack is added in Task 2.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Editor-neutral whitespace and indentation conventions are defined in `.editorconfig`. Automated formatting tooling is also added in Task 2.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Workflow
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Read [AGENTS.md](AGENTS.md) before making changes. Implementation progress is tracked in [TASK.md](TASK.md), and every code, configuration, schema, dependency, or provider change requires the planning and approval workflow defined there.

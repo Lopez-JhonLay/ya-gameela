@@ -15,7 +15,7 @@ This roadmap turns the approved [product requirements](PRD.md), [architecture](A
 
 ## Foundation
 
-- [ ] **1. Establish the repository and runtime baseline**
+- [x] **1. Establish the repository and runtime baseline**
   - **Depends on:** None.
   - **Setup:** Confirm the development machine can run Node.js 24 LTS and identify the exact npm version to pin; read the installed Next.js guides for configuration and Cache Components.
   - **Deliver:** Pin Node.js and npm in repository metadata, add the agreed format/type/test scripts without installing packages, enable Next.js 16 Cache Components, and document the standard local commands.
