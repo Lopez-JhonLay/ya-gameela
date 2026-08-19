@@ -16,6 +16,10 @@
 /test-results
 /blob-report
 
+# supabase local runtime
+/supabase/.branches/
+/supabase/.temp/
+
 # next.js
 /.next/
 /out/

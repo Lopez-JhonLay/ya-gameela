@@ -6,6 +6,7 @@ Ya Gameela V1 is a marketing catalog and custom CMS for perfumes, bags, beauty p
 
 - Node.js `24.13.1` (Node.js 24 LTS)
 - npm `11.8.0`
+- Docker Desktop with the Linux container engine running
 
 The repository declares its package manager in `package.json` and includes an `.nvmrc` for compatible Node version managers.
 
@@ -56,6 +57,43 @@ npm run build
 `npm run check` runs formatting, lint, type, and unit/component tests. `npm run test:e2e:list` validates Playwright discovery without starting a browser. Running the browser suite requires the relevant Playwright browser binaries.
 
 Editor-neutral whitespace and indentation conventions are defined in `.editorconfig`; Prettier provides the automated formatting checks.
+
+## Local Supabase
+
+The Supabase CLI runs PostgreSQL, Auth, Storage, Studio, and supporting services in Docker. No production Supabase project or credentials are required for local development.
+
+Start the services:
+
+```bash
+npm run db:start
+```
+
+Rebuild the database from the ordered migrations and deterministic seed data:
+
+```bash
+npm run db:reset
+```
+
+Run the pgTAP database tests and regenerate the checked-in public-schema types:
+
+```bash
+npm run db:test
+npm run db:types
+```
+
+Inspect service URLs and status, then stop the services when finished:
+
+```bash
+npm run db:status
+npm run db:stop
+```
+
+Supabase Studio is available at [http://localhost:54323](http://localhost:54323) while the services are running. The seed creates two fake email identities for later authorization tests:
+
+- `admin@ya-gameela.test`
+- `visitor@ya-gameela.test`
+
+Both use the local-only password `LocalOnlyPassword123!`. Resetting the database deletes local changes and recreates these identities. Never reuse these credentials or seed identities in production.
 
 ## Project Workflow
 

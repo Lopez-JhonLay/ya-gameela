@@ -36,7 +36,7 @@ This roadmap turns the approved [product requirements](PRD.md), [architecture](A
   - **Verify:** Test valid/invalid environment loading and log redaction, run dependency-boundary checks where configured, then run focused lint, types, tests, and build verification.
   - **Complete when:** New features have canonical locations and browser code cannot import server-only clients, secrets, provider payloads, or raw database rows.
 
-- [ ] **4. Set up local Supabase**
+- [x] **4. Set up local Supabase**
   - **Depends on:** Tasks 2–3.
   - **Setup:** Confirm Docker is available; propose and obtain approval for the Supabase CLI installation method; no production Supabase project or credential is required.
   - **Deliver:** Add local Supabase configuration, ordered migration and pgTAP directories, deterministic seed data, local-only test identities, database reset/test/type-generation scripts, and setup documentation.
