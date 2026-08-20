@@ -21,9 +21,9 @@ const eslintConfig = defineConfig([
         {
           patterns: [
             {
-              group: ["@/modules/*/*"],
+              group: ["@/modules/*/*", "!@/modules/*/server"],
               message:
-                "Import another module through its public index.ts entry point.",
+                "Import another module through index.ts or its designated server.ts entry point.",
             },
           ],
         },
@@ -44,7 +44,7 @@ const eslintConfig = defineConfig([
     },
   },
   {
-    files: ["lib/env/server.ts"],
+    files: ["lib/env/client.ts", "lib/env/server.ts"],
     rules: {
       "no-restricted-syntax": "off",
     },

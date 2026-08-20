@@ -43,14 +43,14 @@ This roadmap turns the approved [product requirements](PRD.md), [architecture](A
   - **Verify:** Start local services, rebuild from an empty database, apply seed data, run a starter pgTAP test, regenerate checked-in TypeScript database types, and stop services cleanly.
   - **Complete when:** A contributor can reproduce the local database and generated types from repository files alone.
 
-- [ ] **5. Build core database security primitives**
+- [x] **5. Build core database security primitives**
   - **Depends on:** Task 4.
   - **Setup:** Define the migration boundary for admin identity, append-only audit events, release foundations, shared update timestamps, job tracking, and authorization helpers.
   - **Deliver:** Add UUID/UTC conventions, `admin_accounts`, PII-safe `admin_audit_events`, release shell tables, `job_runs`, hardened `is_admin()` and security-definer patterns, grants, baseline RLS, and minimum-exposure policies.
   - **Verify:** Run migrations from empty and prior states, pgTAP tests for anonymous/admin/system access, function `search_path` and execution grants, audit immutability, constraints, and generated-type consistency.
   - **Complete when:** Every foundational table has explicit RLS/grants and critical authorization invariants are enforced and tested in PostgreSQL.
 
-- [ ] **6. Implement Google OAuth and the protected CMS shell**
+- [x] **6. Implement Google OAuth and the protected CMS shell**
   - **Depends on:** Tasks 3–5.
   - **Setup:** Configure local Supabase Google OAuth callbacks and local test values for `ADMIN_EMAIL`; production Google/Supabase configuration remains deferred to Task 32.
   - **Deliver:** Add typed browser/server/proxy Supabase clients, PKCE sign-in and callback, server-confirmed claim validation, normalized Gmail allowlisting, first-login ID binding, protected admin layout, sign-out, safe redirects, and admin/auth `noindex` behavior.

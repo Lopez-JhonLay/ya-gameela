@@ -9,16 +9,228 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never;
+      admin_accounts: {
+        Row: {
+          auth_user_id: string | null;
+          bound_at: string | null;
+          created_at: string;
+          email: string;
+          id: string;
+          singleton: boolean;
+          updated_at: string;
+        };
+        Insert: {
+          auth_user_id?: string | null;
+          bound_at?: string | null;
+          created_at?: string;
+          email: string;
+          id?: string;
+          singleton?: boolean;
+          updated_at?: string;
+        };
+        Update: {
+          auth_user_id?: string | null;
+          bound_at?: string | null;
+          created_at?: string;
+          email?: string;
+          id?: string;
+          singleton?: boolean;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      admin_audit_events: {
+        Row: {
+          action: string;
+          actor_kind: Database["public"]["Enums"]["audit_actor_kind"];
+          actor_user_id: string | null;
+          correlation_id: string;
+          id: string;
+          occurred_at: string;
+          outcome: Database["public"]["Enums"]["audit_outcome"];
+          reason_code: string | null;
+          subject_id: string | null;
+          subject_type: string | null;
+        };
+        Insert: {
+          action: string;
+          actor_kind: Database["public"]["Enums"]["audit_actor_kind"];
+          actor_user_id?: string | null;
+          correlation_id?: string;
+          id?: string;
+          occurred_at?: string;
+          outcome: Database["public"]["Enums"]["audit_outcome"];
+          reason_code?: string | null;
+          subject_id?: string | null;
+          subject_type?: string | null;
+        };
+        Update: {
+          action?: string;
+          actor_kind?: Database["public"]["Enums"]["audit_actor_kind"];
+          actor_user_id?: string | null;
+          correlation_id?: string;
+          id?: string;
+          occurred_at?: string;
+          outcome?: Database["public"]["Enums"]["audit_outcome"];
+          reason_code?: string | null;
+          subject_id?: string | null;
+          subject_type?: string | null;
+        };
+        Relationships: [];
+      };
+      job_runs: {
+        Row: {
+          attempt: number;
+          claimed_count: number;
+          correlation_id: string;
+          failed_count: number;
+          finished_at: string | null;
+          id: string;
+          job_name: string;
+          outcome_code: string | null;
+          started_at: string;
+          status: Database["public"]["Enums"]["job_status"];
+          succeeded_count: number;
+          updated_at: string;
+        };
+        Insert: {
+          attempt?: number;
+          claimed_count?: number;
+          correlation_id?: string;
+          failed_count?: number;
+          finished_at?: string | null;
+          id?: string;
+          job_name: string;
+          outcome_code?: string | null;
+          started_at?: string;
+          status?: Database["public"]["Enums"]["job_status"];
+          succeeded_count?: number;
+          updated_at?: string;
+        };
+        Update: {
+          attempt?: number;
+          claimed_count?: number;
+          correlation_id?: string;
+          failed_count?: number;
+          finished_at?: string | null;
+          id?: string;
+          job_name?: string;
+          outcome_code?: string | null;
+          started_at?: string;
+          status?: Database["public"]["Enums"]["job_status"];
+          succeeded_count?: number;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      release_publications: {
+        Row: {
+          entity_id: string;
+          entity_type: string;
+          id: string;
+          previous_version_id: string | null;
+          published_version_id: string | null;
+          recorded_at: string;
+          release_id: string;
+        };
+        Insert: {
+          entity_id: string;
+          entity_type: string;
+          id?: string;
+          previous_version_id?: string | null;
+          published_version_id?: string | null;
+          recorded_at?: string;
+          release_id: string;
+        };
+        Update: {
+          entity_id?: string;
+          entity_type?: string;
+          id?: string;
+          previous_version_id?: string | null;
+          published_version_id?: string | null;
+          recorded_at?: string;
+          release_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "release_publications_release_id_fkey";
+            columns: ["release_id"];
+            isOneToOne: false;
+            referencedRelation: "releases";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      releases: {
+        Row: {
+          created_at: string;
+          created_by: string;
+          failure_code: string | null;
+          id: string;
+          name: string;
+          published_at: string | null;
+          rollback_of_release_id: string | null;
+          status: Database["public"]["Enums"]["release_status"];
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          created_by: string;
+          failure_code?: string | null;
+          id?: string;
+          name: string;
+          published_at?: string | null;
+          rollback_of_release_id?: string | null;
+          status?: Database["public"]["Enums"]["release_status"];
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          created_by?: string;
+          failure_code?: string | null;
+          id?: string;
+          name?: string;
+          published_at?: string | null;
+          rollback_of_release_id?: string | null;
+          status?: Database["public"]["Enums"]["release_status"];
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "releases_rollback_of_release_id_fkey";
+            columns: ["rollback_of_release_id"];
+            isOneToOne: false;
+            referencedRelation: "releases";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      bind_admin_account: {
+        Args: {
+          candidate_user_id: string;
+          expected_email: string;
+          request_correlation_id: string;
+        };
+        Returns: string;
+      };
+      is_admin: { Args: never; Returns: boolean };
     };
     Enums: {
-      [_ in never]: never;
+      audit_actor_kind: "admin" | "system";
+      audit_outcome: "success" | "denied" | "failure";
+      job_status: "running" | "succeeded" | "failed" | "skipped";
+      release_status:
+        | "draft"
+        | "validating"
+        | "ready"
+        | "publishing"
+        | "published"
+        | "failed";
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -145,6 +357,18 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      audit_actor_kind: ["admin", "system"],
+      audit_outcome: ["success", "denied", "failure"],
+      job_status: ["running", "succeeded", "failed", "skipped"],
+      release_status: [
+        "draft",
+        "validating",
+        "ready",
+        "publishing",
+        "published",
+        "failed",
+      ],
+    },
   },
 } as const;

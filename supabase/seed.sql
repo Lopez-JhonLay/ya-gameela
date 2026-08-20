@@ -1,5 +1,7 @@
--- Fake local identities for development and automated tests only.
--- These accounts are recreated by `npm run db:reset` and must never be used in production.
+-- Fake local non-Google identities for development and automated tests only.
+-- Database tests create their own admin binding inside a rolled-back transaction.
+-- Local runtime intentionally starts without an administrator so that the first
+-- approved Google login can create the single stable binding.
 
 insert into auth.users (
   instance_id,
