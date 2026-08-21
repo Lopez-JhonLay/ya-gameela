@@ -59,7 +59,7 @@ This roadmap turns the approved [product requirements](PRD.md), [architecture](A
 
 ## Catalog and Publishing
 
-- [ ] **7. Implement categories and field schemas**
+- [x] **7. Implement categories and field schemas**
   - **Depends on:** Tasks 5–6.
   - **Setup:** Lock validation rules for two taxonomy levels and text, number, measurement, boolean, select, and multi-select specification fields from the architecture.
   - **Deliver:** Add stable category identities and immutable versions, parent/depth/slug constraints, field-schema validation, archive/reassignment safeguards, DTOs, server-only DAL/services, authorized actions, and accessible category CMS screens.

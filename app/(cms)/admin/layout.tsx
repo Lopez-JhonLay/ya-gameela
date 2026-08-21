@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense, type ReactNode } from "react";
 
@@ -28,7 +29,22 @@ async function AuthenticatedAdminShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-neutral-50 text-neutral-950">
       <header className="border-b bg-white px-6 py-4">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
-          <p className="font-semibold">Ya Gameela CMS</p>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/admin"
+              className="font-semibold focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              Ya Gameela CMS
+            </Link>
+            <nav aria-label="Administration">
+              <Link
+                href="/admin/categories"
+                className="text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                Categories
+              </Link>
+            </nav>
+          </div>
           <form action={signOut}>
             <button
               type="submit"

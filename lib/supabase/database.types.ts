@@ -78,6 +78,143 @@ export type Database = {
         };
         Relationships: [];
       };
+      categories: {
+        Row: {
+          archived_at: string | null;
+          archived_by: string | null;
+          created_at: string;
+          current_draft_version_id: string | null;
+          current_published_version_id: string | null;
+          draft_revision: number;
+          id: string;
+          updated_at: string;
+        };
+        Insert: {
+          archived_at?: string | null;
+          archived_by?: string | null;
+          created_at?: string;
+          current_draft_version_id?: string | null;
+          current_published_version_id?: string | null;
+          draft_revision?: number;
+          id?: string;
+          updated_at?: string;
+        };
+        Update: {
+          archived_at?: string | null;
+          archived_by?: string | null;
+          created_at?: string;
+          current_draft_version_id?: string | null;
+          current_published_version_id?: string | null;
+          draft_revision?: number;
+          id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "categories_draft_version_belongs_to_category";
+            columns: ["id", "current_draft_version_id"];
+            isOneToOne: false;
+            referencedRelation: "category_versions";
+            referencedColumns: ["category_id", "id"];
+          },
+          {
+            foreignKeyName: "categories_published_version_belongs_to_category";
+            columns: ["id", "current_published_version_id"];
+            isOneToOne: false;
+            referencedRelation: "category_versions";
+            referencedColumns: ["category_id", "id"];
+          },
+        ];
+      };
+      category_slug_claims: {
+        Row: {
+          category_id: string;
+          claimed_at: string;
+          slug: string;
+        };
+        Insert: {
+          category_id: string;
+          claimed_at?: string;
+          slug: string;
+        };
+        Update: {
+          category_id?: string;
+          claimed_at?: string;
+          slug?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "category_slug_claims_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      category_versions: {
+        Row: {
+          category_id: string;
+          created_at: string;
+          created_by: string;
+          description: string | null;
+          display_order: number;
+          field_schema: Json;
+          id: string;
+          name: string;
+          parent_category_id: string | null;
+          revision: number;
+          seo_description: string | null;
+          seo_title: string | null;
+          slug: string;
+        };
+        Insert: {
+          category_id: string;
+          created_at?: string;
+          created_by: string;
+          description?: string | null;
+          display_order?: number;
+          field_schema?: Json;
+          id?: string;
+          name: string;
+          parent_category_id?: string | null;
+          revision: number;
+          seo_description?: string | null;
+          seo_title?: string | null;
+          slug: string;
+        };
+        Update: {
+          category_id?: string;
+          created_at?: string;
+          created_by?: string;
+          description?: string | null;
+          display_order?: number;
+          field_schema?: Json;
+          id?: string;
+          name?: string;
+          parent_category_id?: string | null;
+          revision?: number;
+          seo_description?: string | null;
+          seo_title?: string | null;
+          slug?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "category_versions_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "category_versions_parent_category_id_fkey";
+            columns: ["parent_category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       job_runs: {
         Row: {
           attempt: number;
@@ -210,6 +347,20 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      archive_category: {
+        Args: {
+          expected_revision: number;
+          input_category_id: string;
+          request_correlation_id: string;
+        };
+        Returns: Database["public"]["CompositeTypes"]["category_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "category_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       bind_admin_account: {
         Args: {
           candidate_user_id: string;
@@ -218,7 +369,63 @@ export type Database = {
         };
         Returns: string;
       };
+      create_category_draft: {
+        Args: {
+          input_description: string;
+          input_display_order: number;
+          input_field_schema: Json;
+          input_name: string;
+          input_parent_category_id: string;
+          input_seo_description: string;
+          input_seo_title: string;
+          input_slug: string;
+          request_correlation_id: string;
+        };
+        Returns: Database["public"]["CompositeTypes"]["category_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "category_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       is_admin: { Args: never; Returns: boolean };
+      restore_category: {
+        Args: {
+          expected_revision: number;
+          input_category_id: string;
+          request_correlation_id: string;
+        };
+        Returns: Database["public"]["CompositeTypes"]["category_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "category_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      update_category_draft: {
+        Args: {
+          expected_revision: number;
+          input_category_id: string;
+          input_description: string;
+          input_display_order: number;
+          input_field_schema: Json;
+          input_name: string;
+          input_parent_category_id: string;
+          input_seo_description: string;
+          input_seo_title: string;
+          input_slug: string;
+          request_correlation_id: string;
+        };
+        Returns: Database["public"]["CompositeTypes"]["category_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "category_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
     };
     Enums: {
       audit_actor_kind: "admin" | "system";
@@ -233,7 +440,10 @@ export type Database = {
         | "failed";
     };
     CompositeTypes: {
-      [_ in never]: never;
+      category_mutation_result: {
+        category_id: string | null;
+        revision: number | null;
+      };
     };
   };
 };
