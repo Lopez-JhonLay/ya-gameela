@@ -2,6 +2,10 @@ begin;
 
 set local search_path = public, extensions;
 
+-- Keep this test deterministic after a developer has completed local OAuth.
+-- The enclosing transaction restores the real local binding on rollback.
+delete from public.admin_accounts;
+
 select plan(22);
 
 select has_function(
@@ -276,6 +280,7 @@ select is(
     from public.admin_audit_events
     where action = 'auth.admin_bind'
       and outcome = 'success'
+      and correlation_id = '90000000-0000-4000-8000-000000000007'
   ),
   1::bigint,
   'the successful first binding is audited once'
@@ -286,6 +291,13 @@ select is(
     from public.admin_audit_events
     where action = 'auth.admin_bind'
       and outcome = 'denied'
+      and correlation_id = any(array[
+        '90000000-0000-4000-8000-000000000002'::uuid,
+        '90000000-0000-4000-8000-000000000004'::uuid,
+        '90000000-0000-4000-8000-000000000005'::uuid,
+        '90000000-0000-4000-8000-000000000006'::uuid,
+        '90000000-0000-4000-8000-000000000009'::uuid
+      ])
   ),
   5::bigint,
   'safe denial reasons are retained without email payloads'

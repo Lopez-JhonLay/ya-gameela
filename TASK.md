@@ -66,7 +66,7 @@ This roadmap turns the approved [product requirements](PRD.md), [architecture](A
   - **Verify:** Test CRUD drafts, two-level limits, slug uniqueness, invalid field definitions, referenced-category deletion denial, optimistic conflicts, RLS, and CMS keyboard/form behavior.
   - **Complete when:** The administrator can safely manage category drafts and schemas without exposing drafts or raw rows publicly.
 
-- [ ] **8. Implement media management**
+- [x] **8. Implement media management**
   - **Depends on:** Tasks 5–7.
   - **Setup:** Configure the local public bucket through migrations; define JPEG, PNG, WebP, and AVIF validation with the 10 MB source limit; prepare an owner-controlled archive procedure.
   - **Deliver:** Add UUID object paths, admin-only write policies, file extension/MIME/signature/size/dimension checks, metadata/checksum/alt/source records, media CMS upload and metadata flows, reference-aware deletion, and orphan reporting.

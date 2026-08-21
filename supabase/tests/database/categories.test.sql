@@ -2,6 +2,10 @@ begin;
 
 set local search_path = public, extensions;
 
+-- Keep this test deterministic after a developer has completed local OAuth.
+-- The enclosing transaction restores the real local binding on rollback.
+delete from public.admin_accounts;
+
 select no_plan();
 
 select has_table('public', 'categories', 'categories exists');
@@ -375,6 +379,15 @@ select is(
       'category.restore'
     )
       and outcome = 'success'
+      and correlation_id = any(array[
+        '74000000-0000-4000-8000-000000000001'::uuid,
+        '74000000-0000-4000-8000-000000000002'::uuid,
+        '74000000-0000-4000-8000-000000000003'::uuid,
+        '74000000-0000-4000-8000-000000000004'::uuid,
+        '74000000-0000-4000-8000-000000000005'::uuid,
+        '74000000-0000-4000-8000-000000000006'::uuid,
+        '74000000-0000-4000-8000-000000000007'::uuid
+      ])
   ),
   7::bigint,
   'successful category mutations append controlled audit events'

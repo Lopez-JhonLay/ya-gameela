@@ -36,12 +36,21 @@ async function AuthenticatedAdminShell({ children }: { children: ReactNode }) {
             >
               Ya Gameela CMS
             </Link>
-            <nav aria-label="Administration">
+            <nav
+              aria-label="Administration"
+              className="flex items-center gap-4"
+            >
               <Link
                 href="/admin/categories"
                 className="text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 Categories
+              </Link>
+              <Link
+                href="/admin/media"
+                className="text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                Media
               </Link>
             </nav>
           </div>

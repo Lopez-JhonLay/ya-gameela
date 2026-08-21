@@ -2,6 +2,10 @@ begin;
 
 set local search_path = public, extensions;
 
+-- Keep this test deterministic after a developer has completed local OAuth.
+-- The enclosing transaction restores the real local binding on rollback.
+delete from public.admin_accounts;
+
 select plan(59);
 
 select has_table('public', 'admin_accounts', 'admin_accounts exists');

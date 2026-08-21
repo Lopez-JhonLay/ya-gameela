@@ -260,6 +260,95 @@ export type Database = {
         };
         Relationships: [];
       };
+      media_asset_references: {
+        Row: {
+          created_at: string;
+          media_asset_id: string;
+          reference_id: string;
+          reference_type: string;
+        };
+        Insert: {
+          created_at?: string;
+          media_asset_id: string;
+          reference_id: string;
+          reference_type: string;
+        };
+        Update: {
+          created_at?: string;
+          media_asset_id?: string;
+          reference_id?: string;
+          reference_type?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "media_asset_references_media_asset_id_fkey";
+            columns: ["media_asset_id"];
+            isOneToOne: false;
+            referencedRelation: "media_assets";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      media_assets: {
+        Row: {
+          alt_text: string;
+          byte_size: number | null;
+          checksum_sha256: string | null;
+          created_at: string;
+          created_by: string;
+          failure_code: string | null;
+          height: number | null;
+          id: string;
+          mime_type: string | null;
+          object_path: string;
+          original_extension: string;
+          source_attribution: string | null;
+          status: Database["public"]["Enums"]["media_asset_status"];
+          updated_at: string;
+          updated_by: string;
+          verified_at: string | null;
+          width: number | null;
+        };
+        Insert: {
+          alt_text: string;
+          byte_size?: number | null;
+          checksum_sha256?: string | null;
+          created_at?: string;
+          created_by: string;
+          failure_code?: string | null;
+          height?: number | null;
+          id: string;
+          mime_type?: string | null;
+          object_path: string;
+          original_extension: string;
+          source_attribution?: string | null;
+          status?: Database["public"]["Enums"]["media_asset_status"];
+          updated_at?: string;
+          updated_by: string;
+          verified_at?: string | null;
+          width?: number | null;
+        };
+        Update: {
+          alt_text?: string;
+          byte_size?: number | null;
+          checksum_sha256?: string | null;
+          created_at?: string;
+          created_by?: string;
+          failure_code?: string | null;
+          height?: number | null;
+          id?: string;
+          mime_type?: string | null;
+          object_path?: string;
+          original_extension?: string;
+          source_attribution?: string | null;
+          status?: Database["public"]["Enums"]["media_asset_status"];
+          updated_at?: string;
+          updated_by?: string;
+          verified_at?: string | null;
+          width?: number | null;
+        };
+        Relationships: [];
+      };
       release_publications: {
         Row: {
           entity_id: string;
@@ -344,7 +433,15 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      media_asset_health: {
+        Row: {
+          detected_from: string | null;
+          issue_code: string | null;
+          media_asset_id: string | null;
+          object_path: string | null;
+        };
+        Relationships: [];
+      };
     };
     Functions: {
       archive_category: {
@@ -361,6 +458,23 @@ export type Database = {
           isSetofReturn: false;
         };
       };
+      begin_media_upload: {
+        Args: {
+          input_alt_text: string;
+          input_byte_size: number;
+          input_declared_mime_type: string;
+          input_extension: string;
+          input_source_attribution: string;
+          request_correlation_id: string;
+        };
+        Returns: Database["public"]["CompositeTypes"]["media_upload_result"];
+        SetofOptions: {
+          from: "*";
+          to: "media_upload_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       bind_admin_account: {
         Args: {
           candidate_user_id: string;
@@ -368,6 +482,16 @@ export type Database = {
           request_correlation_id: string;
         };
         Returns: string;
+      };
+      complete_media_deletion: {
+        Args: { input_media_id: string; request_correlation_id: string };
+        Returns: Database["public"]["CompositeTypes"]["media_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "media_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
       };
       create_category_draft: {
         Args: {
@@ -389,7 +513,49 @@ export type Database = {
           isSetofReturn: false;
         };
       };
+      finalize_media_upload: {
+        Args: {
+          input_byte_size: number;
+          input_checksum_sha256: string;
+          input_height: number;
+          input_media_id: string;
+          input_mime_type: string;
+          input_width: number;
+          request_correlation_id: string;
+        };
+        Returns: Database["public"]["CompositeTypes"]["media_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "media_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       is_admin: { Args: never; Returns: boolean };
+      reject_media_upload: {
+        Args: {
+          input_failure_code: string;
+          input_media_id: string;
+          request_correlation_id: string;
+        };
+        Returns: Database["public"]["CompositeTypes"]["media_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "media_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      request_media_deletion: {
+        Args: { input_media_id: string; request_correlation_id: string };
+        Returns: Database["public"]["CompositeTypes"]["media_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "media_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       restore_category: {
         Args: {
           expected_revision: number;
@@ -426,11 +592,27 @@ export type Database = {
           isSetofReturn: false;
         };
       };
+      update_media_metadata: {
+        Args: {
+          input_alt_text: string;
+          input_media_id: string;
+          input_source_attribution: string;
+          request_correlation_id: string;
+        };
+        Returns: Database["public"]["CompositeTypes"]["media_mutation_result"];
+        SetofOptions: {
+          from: "*";
+          to: "media_mutation_result";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
     };
     Enums: {
       audit_actor_kind: "admin" | "system";
       audit_outcome: "success" | "denied" | "failure";
       job_status: "running" | "succeeded" | "failed" | "skipped";
+      media_asset_status: "pending" | "ready" | "rejected" | "deleting";
       release_status:
         | "draft"
         | "validating"
@@ -443,6 +625,14 @@ export type Database = {
       category_mutation_result: {
         category_id: string | null;
         revision: number | null;
+      };
+      media_mutation_result: {
+        media_id: string | null;
+        status: Database["public"]["Enums"]["media_asset_status"] | null;
+      };
+      media_upload_result: {
+        media_id: string | null;
+        object_path: string | null;
       };
     };
   };
@@ -571,6 +761,7 @@ export const Constants = {
       audit_actor_kind: ["admin", "system"],
       audit_outcome: ["success", "denied", "failure"],
       job_status: ["running", "succeeded", "failed", "skipped"],
+      media_asset_status: ["pending", "ready", "rejected", "deleting"],
       release_status: [
         "draft",
         "validating",
