@@ -189,7 +189,8 @@ function databaseFailure(code: string): CategoryActionState {
     code === "category_parent_self" ||
     code === "category_parent_unavailable" ||
     code === "category_depth_exceeded" ||
-    code === "category_has_children"
+    code === "category_has_children" ||
+    code === "category_has_products"
   ) {
     return actionFailure(code, {
       parentCategoryId: [categoryMessage(code)],
@@ -206,6 +207,8 @@ function categoryMessage(code: string) {
     category_depth_exceeded: "Categories can only have two levels.",
     category_has_children:
       "Reassign or archive this category's active subcategories first.",
+    category_has_products:
+      "Reassign or archive this category's active products first.",
   };
 
   return messages[code] ?? "Choose a valid parent category.";

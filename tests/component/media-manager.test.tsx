@@ -53,6 +53,12 @@ describe("media CMS", () => {
       "(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw",
     );
     expect(screen.getByRole("button", { name: "Delete image" })).toBeDisabled();
+    expect(screen.getByText("Used in 2 saved versions")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "This image is part of saved content history and cannot be deleted.",
+      ),
+    ).toBeInTheDocument();
     expect(
       screen.getByText(/Verified metadata has no Storage object/),
     ).toBeInTheDocument();

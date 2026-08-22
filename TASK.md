@@ -73,7 +73,7 @@ This roadmap turns the approved [product requirements](PRD.md), [architecture](A
   - **Verify:** Test anonymous denial, approved uploads, spoofed/oversized/SVG/HTML rejection, required alt text, referenced deletion denial, orphan behavior, and responsive `next/image` rendering.
   - **Complete when:** Approved media can be managed safely and every usable asset has validated database metadata and alternative text.
 
-- [ ] **9. Implement products and variants**
+- [x] **9. Implement products and variants**
   - **Depends on:** Tasks 7–8.
   - **Setup:** Confirm minor-unit handling for AED/USD/PHP, the four availability values, maximum three option groups, optional unique SKUs, and category-schema validation rules.
   - **Deliver:** Add stable product/variant identities and immutable versions, draft copy and SEO fields, category/specifications, merchandising flags, media ordering, related products, option combinations, prices, availability, DTOs, DAL/services/actions, and product CMS workflows.

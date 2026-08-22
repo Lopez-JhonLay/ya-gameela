@@ -44,21 +44,6 @@ After the user approves a product or architectural change, update the affected [
 
 A concrete implementation request does not bypass the planning gate. Documentation-only edits explicitly requested by the user may proceed without a second redundant approval unless they alter product or architecture decisions.
 
-## Beginner-Friendly Action Explanations
-
-Before each meaningful inspection, implementation, dependency/provider operation, database command, test, build, or verification action, give the user a short explanation using this exact structure:
-
-**What is it?**
-Explain the tool, file, command, or concept in plain language.
-
-**How does it work?**
-Explain what the action will do and what result to expect.
-
-**Why do we use it this way?**
-Explain why the action or approach is appropriate for Ya Gameela, including relevant safety or architectural reasons.
-
-Keep each explanation concise and understandable to a beginner. Closely related commands may share one explanation when they form a single action. If an action fails, explain the failure and intended correction with the same structure before retrying. Never include secrets or sensitive values in an explanation. These explanations supplement and do not replace the planning and approval requirements above.
-
 ## Architecture Guardrails
 
 - Follow the module boundaries, routes, interfaces, and implementation order in [ARCHITECTURE.md](ARCHITECTURE.md).

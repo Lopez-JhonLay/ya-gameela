@@ -282,7 +282,7 @@ function MediaAssetCard({ asset }: { asset: MediaAssetDTO }) {
             {asset.status}
           </span>
           <span className="text-xs text-neutral-600">
-            {asset.referenceCount} reference
+            Used in {asset.referenceCount} saved version
             {asset.referenceCount === 1 ? "" : "s"}
           </span>
         </div>
@@ -412,7 +412,7 @@ function MediaRecoveryControls({ asset }: { asset: MediaAssetDTO }) {
         </button>
         {asset.referenceCount > 0 ? (
           <span className="text-xs text-neutral-600">
-            Remove all content references before deleting.
+            This image is part of saved content history and cannot be deleted.
           </span>
         ) : null}
         <ActionFeedback state={deleteState} success="Image deleted." />

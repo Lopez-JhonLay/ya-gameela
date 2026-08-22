@@ -41,6 +41,12 @@ async function AuthenticatedAdminShell({ children }: { children: ReactNode }) {
               className="flex items-center gap-4"
             >
               <Link
+                href="/admin/products"
+                className="text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                Products
+              </Link>
+              <Link
                 href="/admin/categories"
                 className="text-sm font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
               >

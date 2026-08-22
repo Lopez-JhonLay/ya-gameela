@@ -204,6 +204,7 @@ function normalizeDatabaseError(message: string) {
     "category_archived",
     "category_depth_exceeded",
     "category_has_children",
+    "category_has_products",
     "category_not_archived",
     "category_not_authorized",
     "category_not_found",
